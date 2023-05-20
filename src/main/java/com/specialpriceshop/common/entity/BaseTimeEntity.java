@@ -1,4 +1,4 @@
-package com.specialpriceshop.common.domain;
+package com.specialpriceshop.common.entity;
 
 import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;

@@ -1,6 +1,6 @@
 package com.specialpriceshop.domain;
 
-import com.specialpriceshop.common.domain.BaseTimeEntity;
+import com.specialpriceshop.common.entity.BaseTimeEntity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
