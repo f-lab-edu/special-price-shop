@@ -1,6 +1,6 @@
 package com.specialpriceshop.domain;
 
-import com.specialpriceshop.common.domain.BaseTimeEntity;
+import com.specialpriceshop.common.entity.BaseTimeEntity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +22,7 @@ public class Item extends BaseTimeEntity {
 
     private String description;
 
-    private Double originalPrice;
+    private double originalPrice;
 
     public Item(
         final String name,
