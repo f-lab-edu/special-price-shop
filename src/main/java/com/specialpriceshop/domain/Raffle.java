@@ -2,6 +2,7 @@ package com.specialpriceshop.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,21 +33,24 @@ public class Raffle extends BaseTimeEntity {
 
     private LocalDateTime paymentDueDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id")
     private Item item;
 
+    @Builder
     public Raffle(
         final double rafflePrice,
         final LocalDateTime raffleStartDate,
         final LocalDateTime raffleEndDate,
         final LocalDateTime drawDate,
-        final LocalDateTime paymentDueDate
+        final LocalDateTime paymentDueDate,
+        final Item item
     ) {
         this.rafflePrice = rafflePrice;
         this.raffleStartDate = raffleStartDate;
         this.raffleEndDate = raffleEndDate;
         this.drawDate = drawDate;
         this.paymentDueDate = paymentDueDate;
+        this.item = item;
     }
 }

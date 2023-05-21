@@ -1,11 +1,16 @@
 package com.specialpriceshop.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +29,10 @@ public class Item extends BaseTimeEntity {
 
     private double originalPrice;
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<Stock> stocks = new ArrayList<>();
+
+    @Builder
     public Item(
         final String name,
         final String description,
@@ -32,5 +41,12 @@ public class Item extends BaseTimeEntity {
         this.name = name;
         this.description = description;
         this.originalPrice = originalPrice;
+    }
+
+    public void addStock(final Stock stock) {
+        this.stocks.add(stock);
+        if (stock.getItem() != this) {
+            stock.setItem(this);
+        }
     }
 }
