@@ -4,9 +4,9 @@ import com.specialpriceshop.domain.Item;
 import com.specialpriceshop.domain.Raffle;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Stream;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,9 +62,8 @@ public class RaffleItemCreateRequest {
             .originalPrice(itemOriginalPrice)
             .build();
 
-        Optional.ofNullable(stocks)
-            .orElseGet(Collections::emptyList)
-            .stream()
+        Stream.ofNullable(stocks)
+            .flatMap(Collection::stream)
             .map(StockCreateRequest::toEntity)
             .forEach(s -> s.setItem(item));
 
