@@ -1,8 +1,8 @@
 package com.specialpriceshop.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +30,7 @@ public class Item extends BaseTimeEntity {
     private double originalPrice;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<Stock> stocks = new ArrayList<>();
+    private Set<Stock> stocks = new HashSet<>();
 
     @Builder
     public Item(
@@ -44,13 +44,9 @@ public class Item extends BaseTimeEntity {
     }
 
     public void addStock(final Stock stock) {
-        this.stocks.add(stock);
-        if (stock.getItem() != this) {
+        if (stock != null) {
+            this.stocks.add(stock);
             stock.with(this);
         }
-    }
-
-    public void removeStock(final Stock stock) {
-        this.stocks.remove(stock);
     }
 }
