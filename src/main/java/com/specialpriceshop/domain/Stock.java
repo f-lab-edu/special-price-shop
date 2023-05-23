@@ -40,11 +40,11 @@ public class Stock extends BaseTimeEntity {
         this.addPrice = addPrice;
     }
 
-    public void setItem(final Item item) {
+    public void with(final Item item) {
         if (this.item != null) {
-            this.item.getStocks().remove(this);
+            this.item.removeStock(this);
         }
         this.item = item;
-        item.getStocks().add(this);
+        item.addStock(this);
     }
 }

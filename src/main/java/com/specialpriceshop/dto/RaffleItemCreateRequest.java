@@ -65,7 +65,7 @@ public class RaffleItemCreateRequest {
         Stream.ofNullable(stocks)
             .flatMap(Collection::stream)
             .map(StockCreateRequest::toEntity)
-            .forEach(s -> s.setItem(item));
+            .forEach(s -> s.with(item));
 
         return Raffle.builder()
             .rafflePrice(rafflePrice)

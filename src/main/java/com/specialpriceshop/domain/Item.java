@@ -46,7 +46,11 @@ public class Item extends BaseTimeEntity {
     public void addStock(final Stock stock) {
         this.stocks.add(stock);
         if (stock.getItem() != this) {
-            stock.setItem(this);
+            stock.with(this);
         }
+    }
+
+    public void removeStock(final Stock stock) {
+        this.stocks.remove(stock);
     }
 }
