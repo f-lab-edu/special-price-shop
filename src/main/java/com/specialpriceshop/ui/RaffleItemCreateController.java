@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/raffles")
 @RequiredArgsConstructor
-public class ItemCreateController {
+public class RaffleItemCreateController {
 
     private final RaffleCreateService raffleCreateService;
+
     @PostMapping
-    public ResponseEntity<Void> createItem(@RequestBody RaffleItemCreateRequest request) {
+    public ResponseEntity<Void> createRaffleItem(@RequestBody RaffleItemCreateRequest request) {
         final Long createItemId = raffleCreateService.createRaffleItem(request);
         return ResponseEntity
             .created(URI.create("/items/" + createItemId))
