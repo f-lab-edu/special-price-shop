@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,7 +32,9 @@ public class Stock extends BaseTimeEntity {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    @Builder
     public Stock(
+        final Long id,
         final String optionName,
         final long quantity,
         final double addPrice

@@ -26,7 +26,11 @@ public class StockCreateRequest {
     }
 
     public Stock toEntity() {
-        return new Stock(optionName, quantity, addPrice);
+        return  Stock.builder()
+            .optionName(optionName)
+            .quantity(quantity)
+            .addPrice(addPrice)
+            .build();
     }
 
 }

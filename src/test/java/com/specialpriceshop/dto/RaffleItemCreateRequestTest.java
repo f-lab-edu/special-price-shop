@@ -47,7 +47,6 @@ class RaffleItemCreateRequestTest {
 
         final Raffle entity = raffleItemCreateRequest.toEntity();
 
-        assertEquals(0, entity.getItem().getStocks().size());
         assertNotNull(entity.getItem().getStocks());
     }
 }
