@@ -1,5 +1,6 @@
-package com.specialpriceshop.domain;
+package com.specialpriceshop.domain.raffle;
 
+import com.specialpriceshop.domain.RaffleTimeInfo;
 import com.specialpriceshop.exception.RaffleDrawDateValidException;
 import com.specialpriceshop.exception.RafflePaymentDueDateValidException;
 import com.specialpriceshop.exception.RaffleStartDateValidException;
