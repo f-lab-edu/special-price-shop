@@ -1,29 +1,28 @@
 package com.specialpriceshop.dto;
 
-import static com.specialpriceshop.fixture.RaffleItemCreateRequestFixture.createRaffleItemCreateRequest;
 import static com.specialpriceshop.fixture.StockCreateRequestFixture.createStockCreateRequest;
+import static com.specialpriceshop.fixture.TimeDealItemCreateRequestFixture.createTimedealItemCreateRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.specialpriceshop.domain.Raffle;
+import com.specialpriceshop.domain.TimeDeal;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class RaffleItemCreateRequestTest {
+class TimeDealItemCreateRequestTest {
 
     @Test
     @DisplayName("StockCreateRequest가 null인 경우")
     void toEntity_stockCreateRequestNull() {
-        final RaffleItemCreateRequest raffleItemCreateRequest = createRaffleItemCreateRequest(
+        final TimeDealItemCreateRequest timedealItemCreateRequest = createTimedealItemCreateRequest(
             "상품명",
             "상품설명",
             5000.0,
             1000.0,
-            null
-        );
+            null);
 
-        final Raffle entity = raffleItemCreateRequest.toEntity();
+        final TimeDeal entity = timedealItemCreateRequest.toEntity();
 
         assertEquals(0, entity.getItem().getStocks().size());
         assertNotNull(entity.getItem().getStocks());
@@ -37,15 +36,15 @@ class RaffleItemCreateRequestTest {
             createStockCreateRequest("옵션2", 10L, 20000.0),
             createStockCreateRequest("옵션", 10L, 30000.0)
         );
-        final RaffleItemCreateRequest raffleItemCreateRequest = createRaffleItemCreateRequest(
+
+        final TimeDealItemCreateRequest timedealItemCreateRequest = createTimedealItemCreateRequest(
             "상품명",
             "상품설명",
             5000.0,
             1000.0,
-            stockCreateRequest
-        );
+            stockCreateRequest);
 
-        final Raffle entity = raffleItemCreateRequest.toEntity();
+        final TimeDeal entity = timedealItemCreateRequest.toEntity();
 
         assertNotNull(entity.getItem().getStocks());
     }

@@ -2,6 +2,8 @@ package com.specialpriceshop.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,21 +26,22 @@ public class TimeDeal extends BaseTimeEntity {
 
     private double timeDealPrice;
 
-    private LocalDateTime dealStartDate;
+    @Embedded
+    private TimeDealTimeInfo timeDealTimeInfo;
 
-    private LocalDateTime dealEndDate;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id")
     private Item item;
 
+    @Builder
     public TimeDeal(
         final double timeDealPrice,
-        final LocalDateTime dealStartDate,
-        final LocalDateTime dealEndDate
+        final LocalDateTime timeDealStartDate,
+        final LocalDateTime timeDealEndDate,
+        final Item item
     ) {
         this.timeDealPrice = timeDealPrice;
-        this.dealStartDate = dealStartDate;
-        this.dealEndDate = dealEndDate;
+        this.timeDealTimeInfo = new TimeDealTimeInfo(timeDealStartDate, timeDealEndDate);
+        this.item = item;
     }
 }

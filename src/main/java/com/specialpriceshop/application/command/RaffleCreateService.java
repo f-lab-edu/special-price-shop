@@ -13,7 +13,7 @@ public class RaffleCreateService {
     private final RaffleRepository raffleRepository;
 
     public Long createRaffleItem(final RaffleItemCreateRequest request) {
-        final Raffle save = raffleRepository.save(request.toEntity());
-        return save.getId();
+        final Raffle saved = raffleRepository.save(request.toEntity());
+        return saved.getId();
     }
 }
