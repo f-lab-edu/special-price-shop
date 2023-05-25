@@ -13,7 +13,7 @@ public class TimeDealCreateService {
     private final TimeDealRepository timeDealRepository;
 
     public Long createTimeDealItem(final TimeDealItemCreateRequest request) {
-        final TimeDeal save = timeDealRepository.save(request.toEntity());
-        return save.getId();
+        final TimeDeal saved = timeDealRepository.save(request.toEntity());
+        return saved.getId();
     }
 }
