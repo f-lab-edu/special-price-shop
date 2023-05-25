@@ -59,7 +59,7 @@ public class Stock extends BaseTimeEntity {
             return false;
         }
         final Stock stock = (Stock) o;
-        return Objects.equals(id, stock.id);
+        return id != null && Objects.equals(id, stock.id);
     }
 
     @Override
