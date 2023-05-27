@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/time-deal")
+@RequestMapping("/time-deals")
 @RequiredArgsConstructor
 public class TimeDealItemCreateController {
 
     private final TimeDealCreateService timeDealCreateService;
 
     @PostMapping
-    public ResponseEntity<Void> createRaffleItem(@RequestBody TimeDealItemCreateRequest request) {
+    public ResponseEntity<Void> createTimeDealItem(@RequestBody TimeDealItemCreateRequest request) {
         final Long createItemId = timeDealCreateService.createTimeDealItem(request);
         return ResponseEntity
-            .created(URI.create("/items/" + createItemId))
+            .created(URI.create("/time-deals/" + createItemId))
             .build();
     }
 }
