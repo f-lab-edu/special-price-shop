@@ -4,8 +4,9 @@ import com.specialpriceshop.dto.RaffleItemDetailResponse;
 import com.specialpriceshop.dto.RaffleItemResponse;
 import com.specialpriceshop.exception.RaffleNotfoundException;
 import com.specialpriceshop.repository.RaffleRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,11 +25,8 @@ public class RaffleQueryService {
         );
     }
 
-    public List<RaffleItemResponse> queryRaffleList() {
+    public Page<RaffleItemResponse> queryRaffleList(final PageRequest pageRequest) {
 
-        return raffleRepository.findAll()
-            .stream()
-            .map(RaffleItemResponse::of)
-            .toList();
+        return raffleRepository.findAllRaffleItemResponses(pageRequest);
     }
 }
