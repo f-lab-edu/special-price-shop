@@ -1,9 +1,8 @@
 package com.specialpriceshop.timedeal.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.specialpriceshop.timedeal.exception.TimeDealStartDateValidException;
-import com.specialpriceshop.timedeal.domain.TimeDealTimeInfo;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

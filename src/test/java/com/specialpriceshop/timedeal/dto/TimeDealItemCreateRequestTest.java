@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.specialpriceshop.item.dto.StockCreateRequest;
-import com.specialpriceshop.timedeal.dto.TimeDealItemCreateRequest;
 import com.specialpriceshop.timedeal.domain.TimeDeal;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
