@@ -20,9 +20,9 @@ public class RaffleQueryController {
 
     private final RaffleQueryService raffleQueryService;
 
-    @GetMapping("/{raffleId}")
+    @GetMapping("/{raffle-id}")
     public ResponseEntity<RaffleItemDetailResponse> getRaffleItemDetail(
-        @PathVariable("raffleId") final Long raffleId
+        @PathVariable("raffle-id") final Long raffleId
     ) {
         return ResponseEntity.ok(raffleQueryService.queryRaffle(raffleId));
     }
