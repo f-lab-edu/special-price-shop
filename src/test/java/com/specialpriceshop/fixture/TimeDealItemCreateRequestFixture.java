@@ -1,7 +1,7 @@
 package com.specialpriceshop.fixture;
 
-import com.specialpriceshop.dto.StockCreateRequest;
-import com.specialpriceshop.dto.TimeDealItemCreateRequest;
+import com.specialpriceshop.item.dto.StockCreateRequest;
+import com.specialpriceshop.timedeal.dto.TimeDealItemCreateRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 

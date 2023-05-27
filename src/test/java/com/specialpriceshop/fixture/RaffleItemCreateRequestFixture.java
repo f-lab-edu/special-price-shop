@@ -1,7 +1,7 @@
 package com.specialpriceshop.fixture;
 
-import com.specialpriceshop.dto.RaffleItemCreateRequest;
-import com.specialpriceshop.dto.StockCreateRequest;
+import com.specialpriceshop.raffle.dto.RaffleItemCreateRequest;
+import com.specialpriceshop.item.dto.StockCreateRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 
