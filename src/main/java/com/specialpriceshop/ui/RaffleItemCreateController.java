@@ -21,7 +21,7 @@ public class RaffleItemCreateController {
     public ResponseEntity<Void> createRaffleItem(@RequestBody RaffleItemCreateRequest request) {
         final Long createItemId = raffleCreateService.createRaffleItem(request);
         return ResponseEntity
-            .created(URI.create("/items/" + createItemId))
+            .created(URI.create("/raffles/" + createItemId))
             .build();
     }
 }
