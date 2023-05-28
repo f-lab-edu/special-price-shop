@@ -1,6 +1,6 @@
 package com.specialpriceshop.fixture;
 
-import com.specialpriceshop.dto.StockCreateRequest;
+import com.specialpriceshop.item.dto.StockCreateRequest;
 
 public class StockCreateRequestFixture {
 
