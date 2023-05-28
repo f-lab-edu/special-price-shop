@@ -1,13 +1,11 @@
 package com.specialpriceshop.raffle.exception;
 
-public class RaffleDrawDateValidException extends RuntimeException {
+import com.specialpriceshop.common.error.exception.InvalidValueException;
+import com.specialpriceshop.common.response.ErrorCode;
 
-    public RaffleDrawDateValidException(final String message) {
-        super(message);
+public class RaffleDrawDateValidException extends InvalidValueException {
+
+    public RaffleDrawDateValidException() {
+        super(ErrorCode.RAFFLE_DRAW_DATE_INVALID);
     }
-
-    public RaffleDrawDateValidException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
 }

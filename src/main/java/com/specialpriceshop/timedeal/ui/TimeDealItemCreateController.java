@@ -3,6 +3,7 @@ package com.specialpriceshop.timedeal.ui;
 import com.specialpriceshop.timedeal.application.command.TimeDealCreateService;
 import com.specialpriceshop.timedeal.dto.TimeDealItemCreateRequest;
 import java.net.URI;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,8 @@ public class TimeDealItemCreateController {
     private final TimeDealCreateService timeDealCreateService;
 
     @PostMapping
-    public ResponseEntity<Void> createTimeDealItem(@RequestBody TimeDealItemCreateRequest request) {
+    public ResponseEntity<Void> createTimeDealItem(
+        @RequestBody @Valid TimeDealItemCreateRequest request) {
         final Long createItemId = timeDealCreateService.createTimeDealItem(request);
         return ResponseEntity
             .created(URI.create("/time-deals/" + createItemId))

@@ -1,5 +1,6 @@
-package com.specialpriceshop.timedeal.domain;
+package com.specialpriceshop.timedeal.repository;
 
+import com.specialpriceshop.timedeal.domain.TimeDeal;
 import com.specialpriceshop.timedeal.dto.TimeDealItemResponse;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

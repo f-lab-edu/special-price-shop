@@ -1,15 +1,11 @@
 package com.specialpriceshop.raffle.exception;
 
-public class RaffleNotfoundException extends RuntimeException {
-    public RaffleNotfoundException(final String message) {
-        super(message);
-    }
+import com.specialpriceshop.common.error.exception.EntityNotFoundException;
+import com.specialpriceshop.common.response.ErrorCode;
 
-    public RaffleNotfoundException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
+public class RaffleNotfoundException extends EntityNotFoundException {
 
-    public RaffleNotfoundException() {
-        super();
+    public RaffleNotfoundException(final String target) {
+        super(target + " is Not Found", ErrorCode.RAFFLE_NOT_FOUND);
     }
 }

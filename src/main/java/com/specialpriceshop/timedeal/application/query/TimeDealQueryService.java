@@ -1,9 +1,9 @@
 package com.specialpriceshop.timedeal.application.query;
 
-import com.specialpriceshop.timedeal.domain.TimeDealRepository;
 import com.specialpriceshop.timedeal.dto.TimeDealItemDetailResponse;
 import com.specialpriceshop.timedeal.dto.TimeDealItemResponse;
 import com.specialpriceshop.timedeal.exception.TimeDealNotFoundException;
+import com.specialpriceshop.timedeal.repository.TimeDealRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +21,7 @@ public class TimeDealQueryService {
 
         return TimeDealItemDetailResponse.of(
             timeDealRepository.findById(timeDealId)
-                .orElseThrow(TimeDealNotFoundException::new));
+                .orElseThrow(() -> new TimeDealNotFoundException(String.valueOf(timeDealId))));
     }
 
     public Page<TimeDealItemResponse> queryTimeDealList(final PageRequest pageRequest) {

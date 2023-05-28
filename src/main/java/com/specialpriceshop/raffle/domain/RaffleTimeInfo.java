@@ -42,7 +42,7 @@ public class RaffleTimeInfo {
         final LocalDateTime raffleEndDate
     ) {
         if (raffleStartDate.isAfter(raffleEndDate)) {
-            throw new RaffleStartDateValidException("시작시간과 종료시간이 올바르지 않습니다.");
+            throw new RaffleStartDateValidException();
         }
     }
 
@@ -51,7 +51,7 @@ public class RaffleTimeInfo {
         final LocalDateTime drawDate
     ) {
         if (raffleEndDate.isAfter(drawDate)) {
-            throw new RaffleDrawDateValidException("종료시간과 당첨시간이 올바르지 않습니다.");
+            throw new RaffleDrawDateValidException();
         }
     }
 
@@ -60,7 +60,7 @@ public class RaffleTimeInfo {
         final LocalDateTime paymentDueDate
     ) {
         if (drawDate.isAfter(paymentDueDate)) {
-            throw new RafflePaymentDueDateValidException("당첨시간과 결제만료일이 올바르지 않습니다");
+            throw new RafflePaymentDueDateValidException();
         }
     }
 

@@ -1,5 +1,6 @@
-package com.specialpriceshop.raffle.domain;
+package com.specialpriceshop.raffle.repository;
 
+import com.specialpriceshop.raffle.domain.Raffle;
 import com.specialpriceshop.raffle.dto.RaffleItemResponse;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

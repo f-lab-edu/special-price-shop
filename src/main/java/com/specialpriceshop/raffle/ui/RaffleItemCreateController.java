@@ -3,6 +3,7 @@ package com.specialpriceshop.raffle.ui;
 import com.specialpriceshop.raffle.application.command.RaffleCreateService;
 import com.specialpriceshop.raffle.dto.RaffleItemCreateRequest;
 import java.net.URI;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,8 @@ public class RaffleItemCreateController {
     private final RaffleCreateService raffleCreateService;
 
     @PostMapping
-    public ResponseEntity<Void> createRaffleItem(@RequestBody RaffleItemCreateRequest request) {
+    public ResponseEntity<Void> createRaffleItem(
+        @RequestBody @Valid RaffleItemCreateRequest request) {
         final Long createItemId = raffleCreateService.createRaffleItem(request);
         return ResponseEntity
             .created(URI.create("/raffles/" + createItemId))

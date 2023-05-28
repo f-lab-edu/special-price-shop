@@ -30,7 +30,8 @@ public class TimeDealTimeInfo {
         final LocalDateTime dealEndDate
     ) {
         if (dealStartDate.isAfter(dealEndDate)) {
-            throw new TimeDealStartDateValidException("시작시간과 종료시간이 올바르지 않습니다.");
+//            throw new TimeDealStartDateValidException("시작시간과 종료시간이 올바르지 않습니다.");
+            throw new TimeDealStartDateValidException();
         }
     }
 }
