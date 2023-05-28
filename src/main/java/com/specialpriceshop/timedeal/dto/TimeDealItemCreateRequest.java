@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.validation.Valid;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,18 +21,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TimeDealItemCreateRequest {
 
+    @NotEmpty
     private String itemName;
 
+    @NotNull
     private String itemDescription;
 
     private double itemOriginalPrice;
 
     private double timeDealPrice;
 
+    @NotNull
+    @FutureOrPresent
     private LocalDateTime timeDealStartDate;
 
+    @NotNull
+    @Future
     private LocalDateTime timeDealEndDate;
 
+    @Valid
     private List<StockCreateRequest> stocks = new ArrayList<>();
 
     public TimeDealItemCreateRequest(

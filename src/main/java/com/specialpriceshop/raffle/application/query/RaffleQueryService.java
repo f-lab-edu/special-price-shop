@@ -1,9 +1,9 @@
 package com.specialpriceshop.raffle.application.query;
 
-import com.specialpriceshop.raffle.domain.RaffleRepository;
 import com.specialpriceshop.raffle.dto.RaffleItemDetailResponse;
 import com.specialpriceshop.raffle.dto.RaffleItemResponse;
 import com.specialpriceshop.raffle.exception.RaffleNotfoundException;
+import com.specialpriceshop.raffle.repository.RaffleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +21,7 @@ public class RaffleQueryService {
 
         return RaffleItemDetailResponse.of(
             raffleRepository.findById(id)
-                .orElseThrow(RaffleNotfoundException::new)
+                .orElseThrow(() -> new RaffleNotfoundException(String.valueOf(id)))
         );
     }
 

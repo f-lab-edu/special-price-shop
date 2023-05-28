@@ -1,6 +1,7 @@
 package com.specialpriceshop.item.dto;
 
 import com.specialpriceshop.item.domain.Stock;
+import javax.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StockCreateRequest {
 
+    @NotEmpty
     private String optionName;
 
     private long quantity;

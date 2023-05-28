@@ -1,15 +1,11 @@
 package com.specialpriceshop.timedeal.exception;
 
-public class TimeDealNotFoundException extends RuntimeException{
-    public TimeDealNotFoundException(final String message) {
-        super(message);
-    }
+import com.specialpriceshop.common.error.exception.EntityNotFoundException;
+import com.specialpriceshop.common.response.ErrorCode;
 
-    public TimeDealNotFoundException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
+public class TimeDealNotFoundException extends EntityNotFoundException {
 
-    public TimeDealNotFoundException() {
-        super();
+    public TimeDealNotFoundException(final String target) {
+        super(target + " is Not Found", ErrorCode.TIME_DEAL_NOT_FOUND);
     }
 }

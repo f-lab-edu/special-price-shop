@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.validation.Valid;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,22 +21,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RaffleItemCreateRequest {
 
+    @NotEmpty
     private String itemName;
 
+    @NotEmpty
     private String itemDescription;
 
     private double itemOriginalPrice;
 
     private double rafflePrice;
 
+    @NotNull
+    @FutureOrPresent
     private LocalDateTime raffleStartDate;
 
+    @NotNull
+    @Future
     private LocalDateTime raffleEndDate;
 
+    @NotNull
+    @Future
     private LocalDateTime drawDate;
 
+    @NotNull
+    @Future
     private LocalDateTime paymentDueDate;
 
+    @Valid
     private List<StockCreateRequest> stocks = new ArrayList<>();
 
     public RaffleItemCreateRequest(

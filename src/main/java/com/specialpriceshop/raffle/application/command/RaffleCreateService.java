@@ -1,8 +1,8 @@
 package com.specialpriceshop.raffle.application.command;
 
 import com.specialpriceshop.raffle.domain.Raffle;
-import com.specialpriceshop.raffle.domain.RaffleRepository;
 import com.specialpriceshop.raffle.dto.RaffleItemCreateRequest;
+import com.specialpriceshop.raffle.repository.RaffleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
