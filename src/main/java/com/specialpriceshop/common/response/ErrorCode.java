@@ -1,5 +1,8 @@
 package com.specialpriceshop.common.response;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorCode {
     //Common
     INVALID_INPUT_VALUE(400, "C001", " Invalid Input Value"),
@@ -28,19 +31,6 @@ public enum ErrorCode {
         this.message = message;
         this.code = code;
     }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
 
 
 }
