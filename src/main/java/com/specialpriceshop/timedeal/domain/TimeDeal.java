@@ -45,4 +45,9 @@ public class TimeDeal extends BaseTimeEntity {
         this.timeDealTimeInfo = new TimeDealTimeInfo(timeDealStartDate, timeDealEndDate);
         this.item = item;
     }
+
+    public boolean isAvailable() {
+        return LocalDateTime.now().isAfter(timeDealTimeInfo.getDealStartDate())
+            && LocalDateTime.now().isBefore(timeDealTimeInfo.getDealEndDate());
+    }
 }

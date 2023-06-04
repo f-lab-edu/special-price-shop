@@ -35,4 +35,12 @@ public interface TimeDealRepository extends JpaRepository<TimeDeal, Long> {
         """)
     Page<TimeDealItemResponse> findAllTimeDealItemResponses(Pageable pageable);
 
+    @Query(value = """
+        SELECT t
+        FROM TimeDeal t
+        INNER JOIN FETCH t.item ti
+        LEFT JOIN FETCH ti.stocks
+        WHERE ti.id =:itemId
+        """)
+    Optional<TimeDeal> findByItemId(final Long itemId);
 }

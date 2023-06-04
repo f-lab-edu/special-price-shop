@@ -1,5 +1,6 @@
 package com.specialpriceshop.order.domain;
 
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,20 +12,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderStock {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long quantity;
+    private BigDecimal amount;
 
-    private Long stockId;
-
-    public OrderStock(
-        final Long quantity,
-        final Long stockId) {
-        this.quantity = quantity;
-        this.stockId = stockId;
+    public Payment(final BigDecimal amount) {
+        this.amount = amount;
     }
 }
