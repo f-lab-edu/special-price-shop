@@ -3,6 +3,7 @@ package com.specialpriceshop.raffle.dto;
 import com.specialpriceshop.item.domain.Item;
 import com.specialpriceshop.item.dto.StockCreateRequest;
 import com.specialpriceshop.raffle.domain.Raffle;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,9 +28,9 @@ public class RaffleItemCreateRequest {
     @NotEmpty
     private String itemDescription;
 
-    private double itemOriginalPrice;
+    private BigDecimal itemOriginalPrice;
 
-    private double rafflePrice;
+    private BigDecimal rafflePrice;
 
     @NotNull
     @FutureOrPresent
@@ -53,8 +54,8 @@ public class RaffleItemCreateRequest {
     public RaffleItemCreateRequest(
         final String itemName,
         final String itemDescription,
-        final double itemOriginalPrice,
-        final double rafflePrice,
+        final BigDecimal itemOriginalPrice,
+        final BigDecimal rafflePrice,
         final LocalDateTime raffleStartDate,
         final LocalDateTime raffleEndDate,
         final LocalDateTime drawDate,

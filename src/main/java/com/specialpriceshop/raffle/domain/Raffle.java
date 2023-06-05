@@ -2,6 +2,7 @@ package com.specialpriceshop.raffle.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
 import com.specialpriceshop.item.domain.Item;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
@@ -25,7 +26,7 @@ public class Raffle extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double rafflePrice;
+    private BigDecimal rafflePrice;
 
     @Embedded
     private RaffleTimeInfo raffleTimeInfo;
@@ -36,7 +37,7 @@ public class Raffle extends BaseTimeEntity {
 
     @Builder
     public Raffle(
-        final double rafflePrice,
+        final BigDecimal rafflePrice,
         final LocalDateTime raffleStartDate,
         final LocalDateTime raffleEndDate,
         final LocalDateTime drawDate,

@@ -3,7 +3,6 @@ package com.specialpriceshop.raffle.domain;
 import com.specialpriceshop.raffle.exception.RaffleDrawDateValidException;
 import com.specialpriceshop.raffle.exception.RafflePaymentDueDateValidException;
 import com.specialpriceshop.raffle.exception.RaffleStartDateValidException;
-import com.specialpriceshop.raffle.domain.RaffleTimeInfo;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

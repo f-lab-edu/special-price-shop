@@ -1,6 +1,8 @@
 package com.specialpriceshop.item.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
+import com.specialpriceshop.item.exception.NotFoundStockException;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -27,7 +29,7 @@ public class Item extends BaseTimeEntity {
 
     private String description;
 
-    private double originalPrice;
+    private BigDecimal originalPrice;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Set<Stock> stocks = new HashSet<>();
@@ -36,7 +38,7 @@ public class Item extends BaseTimeEntity {
     public Item(
         final String name,
         final String description,
-        final Double originalPrice
+        final BigDecimal originalPrice
     ) {
         this.name = name;
         this.description = description;
@@ -48,5 +50,24 @@ public class Item extends BaseTimeEntity {
             this.stocks.add(stock);
             stock.with(this);
         }
+    }
+
+    public BigDecimal calcAmount(
+        final Long stockId,
+        final BigDecimal timeDealPrice,
+        final long quantity
+    ) {
+        return timeDealPrice
+            .add(findStocks(stockId).getAddPrice())
+            .multiply(BigDecimal.valueOf(quantity));
+    }
+
+    private Stock findStocks(final Long stockId) {
+
+        return stocks
+            .stream()
+            .filter(s -> s.getId().equals(stockId))
+            .findFirst()
+            .orElseThrow(NotFoundStockException::new);
     }
 }

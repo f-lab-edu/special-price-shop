@@ -2,6 +2,7 @@ package com.specialpriceshop.timedeal.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
 import com.specialpriceshop.item.domain.Item;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
@@ -25,7 +26,7 @@ public class TimeDeal extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double timeDealPrice;
+    private BigDecimal timeDealPrice;
 
     @Embedded
     private TimeDealTimeInfo timeDealTimeInfo;
@@ -36,7 +37,7 @@ public class TimeDeal extends BaseTimeEntity {
 
     @Builder
     public TimeDeal(
-        final double timeDealPrice,
+        final BigDecimal timeDealPrice,
         final LocalDateTime timeDealStartDate,
         final LocalDateTime timeDealEndDate,
         final Item item
@@ -46,8 +47,12 @@ public class TimeDeal extends BaseTimeEntity {
         this.item = item;
     }
 
-    public boolean isAvailable() {
-        return LocalDateTime.now().isAfter(timeDealTimeInfo.getDealStartDate())
-            && LocalDateTime.now().isBefore(timeDealTimeInfo.getDealEndDate());
+    public boolean isAvailable(final LocalDateTime localDateTime) {
+        return localDateTime.isAfter(timeDealTimeInfo.getDealStartDate())
+            && localDateTime.isBefore(timeDealTimeInfo.getDealEndDate());
+    }
+
+    public BigDecimal calcAmount(final Long stockId, final long quantity) {
+        return item.calcAmount(stockId, timeDealPrice, quantity);
     }
 }

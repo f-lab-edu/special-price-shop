@@ -3,7 +3,8 @@ package com.specialpriceshop.order.dto;
 import com.specialpriceshop.order.domain.Order;
 import com.specialpriceshop.order.domain.OrderStock;
 import com.specialpriceshop.order.domain.Orderline;
-import java.time.LocalDateTime;
+import com.specialpriceshop.order.domain.Payment;
+import com.specialpriceshop.timedeal.domain.TimeDeal;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -33,17 +34,19 @@ public class OrderCreateRequest {
     }
 
     public Order toEntity(
-        final Long itemId,
         final String userId,
-        final LocalDateTime timeDealEndDate
+        final TimeDeal timeDeal
     ) {
         final OrderStock orderStock = new OrderStock(quantity, stockId);
-        final Orderline orderline = new Orderline(itemId, orderStock);
+        final Orderline orderline = new Orderline(timeDeal.getItem().getId(), orderStock);
+        final Payment payment = new Payment(timeDeal.calcAmount(stockId, quantity));
+
         return Order.timeDealOrder(
             orderline,
             userId,
             address,
-            timeDealEndDate
+            timeDeal.getTimeDealTimeInfo().getDealEndDate(),
+            payment
         );
     }
 }

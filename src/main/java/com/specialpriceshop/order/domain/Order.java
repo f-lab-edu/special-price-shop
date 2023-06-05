@@ -68,7 +68,8 @@ public class Order {
         final Orderline orderline,
         final String userId,
         final String address,
-        final LocalDateTime paymentDueDate) {
+        final LocalDateTime paymentDueDate,
+        final Payment payment) {
         return Order.builder()
             .orderType(OrderType.TIME_DEAL)
             .orderStatus(OrderStatus.ORDER)
@@ -76,10 +77,7 @@ public class Order {
             .userId(userId)
             .address(address)
             .paymentDueDate(paymentDueDate)
+            .payment(payment)
             .build();
-    }
-
-    public void createPayment(final Payment payment) {
-        this.payment = payment;
     }
 }

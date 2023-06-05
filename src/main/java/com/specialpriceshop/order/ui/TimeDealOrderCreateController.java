@@ -19,7 +19,7 @@ public class TimeDealOrderCreateController {
 
     private final OrderCreateService orderCreateService;
 
-    @PostMapping("/time-deal/{time-deal-id}")
+    @PostMapping("/time-deals/{time-deal-id}")
     public ResponseEntity<Void> createTimeDealOrder(
         @PathVariable("time-deal-id") final Long timeDealId,
         @RequestBody @Valid OrderCreateRequest orderCreateRequest

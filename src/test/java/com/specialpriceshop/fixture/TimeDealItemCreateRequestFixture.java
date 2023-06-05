@@ -2,6 +2,7 @@ package com.specialpriceshop.fixture;
 
 import com.specialpriceshop.item.dto.StockCreateRequest;
 import com.specialpriceshop.timedeal.dto.TimeDealItemCreateRequest;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,8 +11,8 @@ public class TimeDealItemCreateRequestFixture {
     public static TimeDealItemCreateRequest createTimedealItemCreateRequest(
         final String itemName,
         final String itemDescription,
-        final double itemOriginalPrice,
-        final double timeDealPrice,
+        final BigDecimal itemOriginalPrice,
+        final BigDecimal timeDealPrice,
         final LocalDateTime timeDealStartDate,
         final LocalDateTime timeDealEndDate,
         final List<StockCreateRequest> stocks
@@ -30,8 +31,8 @@ public class TimeDealItemCreateRequestFixture {
     public static TimeDealItemCreateRequest createTimedealItemCreateRequest(
         final String itemName,
         final String itemDescription,
-        final double itemOriginalPrice,
-        final double timeDealPrice,
+        final BigDecimal itemOriginalPrice,
+        final BigDecimal timeDealPrice,
         final List<StockCreateRequest> stocks
     ) {
         return new TimeDealItemCreateRequest(

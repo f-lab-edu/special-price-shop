@@ -1,14 +1,15 @@
 package com.specialpriceshop.timedeal.dto;
 
 import com.specialpriceshop.timedeal.domain.TimeDeal;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record TimeDealItemResponse(Long timeDealId,
                                    Long itemId,
                                    String itemName,
                                    String itemDescription,
-                                   double itemOriginalPrice,
-                                   double timeDealPrice,
+                                   BigDecimal itemOriginalPrice,
+                                   BigDecimal timeDealPrice,
                                    LocalDateTime dealStartDate,
                                    LocalDateTime dealEndDate
 ) {

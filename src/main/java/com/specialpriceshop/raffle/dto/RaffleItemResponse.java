@@ -1,6 +1,7 @@
 package com.specialpriceshop.raffle.dto;
 
 import com.specialpriceshop.raffle.domain.Raffle;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record RaffleItemResponse(Long raffleId,
@@ -8,9 +9,9 @@ public record RaffleItemResponse(Long raffleId,
                                  String itemName,
                                  String itemDescription,
 
-                                 double itemOriginalPrice,
+                                 BigDecimal itemOriginalPrice,
 
-                                 double rafflePrice,
+                                 BigDecimal rafflePrice,
 
                                  LocalDateTime raffleStartDate,
 

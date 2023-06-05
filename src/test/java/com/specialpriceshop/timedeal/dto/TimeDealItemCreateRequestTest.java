@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.specialpriceshop.item.dto.StockCreateRequest;
 import com.specialpriceshop.timedeal.domain.TimeDeal;
+import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,8 @@ class TimeDealItemCreateRequestTest {
         final TimeDealItemCreateRequest timedealItemCreateRequest = createTimedealItemCreateRequest(
             "상품명",
             "상품설명",
-            5000.0,
-            1000.0,
+            BigDecimal.valueOf(5000),
+            BigDecimal.valueOf(1000.0),
             null);
 
         final TimeDeal entity = timedealItemCreateRequest.toEntity();
@@ -33,16 +34,16 @@ class TimeDealItemCreateRequestTest {
     @DisplayName("StockCreateRequest가 null이 아닌 경우")
     void toEntity_stockCreateRequest() {
         final List<StockCreateRequest> stockCreateRequest = List.of(
-            createStockCreateRequest("옵션1", 10L, 10000.0),
-            createStockCreateRequest("옵션2", 10L, 20000.0),
-            createStockCreateRequest("옵션", 10L, 30000.0)
+            createStockCreateRequest("옵션1", 10L, BigDecimal.valueOf(10000.0)),
+            createStockCreateRequest("옵션2", 10L, BigDecimal.valueOf(20000.0)),
+            createStockCreateRequest("옵션", 10L, BigDecimal.valueOf(30000.0))
         );
 
         final TimeDealItemCreateRequest timedealItemCreateRequest = createTimedealItemCreateRequest(
             "상품명",
             "상품설명",
-            5000.0,
-            1000.0,
+            BigDecimal.valueOf(5000),
+            BigDecimal.valueOf(1000.0),
             stockCreateRequest);
 
         final TimeDeal entity = timedealItemCreateRequest.toEntity();

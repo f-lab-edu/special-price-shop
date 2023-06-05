@@ -2,6 +2,7 @@ package com.specialpriceshop.timedeal.dto;
 
 import com.specialpriceshop.item.dto.StockResponse;
 import com.specialpriceshop.timedeal.domain.TimeDeal;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,8 +11,8 @@ public record TimeDealItemDetailResponse(Long timeDealId,
                                          Long itemId,
                                          String itemName,
                                          String itemDescription,
-                                         double itemOriginalPrice,
-                                         double timeDealPrice,
+                                         BigDecimal itemOriginalPrice,
+                                         BigDecimal timeDealPrice,
                                          LocalDateTime dealStartDate,
                                          LocalDateTime dealEndDate,
                                          Set<StockResponse> stockResponses) {
