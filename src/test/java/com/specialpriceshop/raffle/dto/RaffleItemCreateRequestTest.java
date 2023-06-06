@@ -1,13 +1,12 @@
 package com.specialpriceshop.raffle.dto;
 
-import static com.specialpriceshop.fixture.RaffleItemCreateRequestFixture.createRaffleItemCreateRequest;
+import static com.specialpriceshop.fixture.raffle.RaffleItemCreateRequestFixture.createRaffleItemCreateRequest;
 import static com.specialpriceshop.fixture.StockCreateRequestFixture.createStockCreateRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.specialpriceshop.item.dto.StockCreateRequest;
 import com.specialpriceshop.raffle.domain.Raffle;
-import com.specialpriceshop.raffle.dto.RaffleItemCreateRequest;
 import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,8 @@
-package com.specialpriceshop.fixture;
+package com.specialpriceshop.fixture.raffle;
 
 import com.specialpriceshop.raffle.dto.RaffleItemCreateRequest;
 import com.specialpriceshop.item.dto.StockCreateRequest;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class RaffleItemCreateRequestFixture {
     public static RaffleItemCreateRequest createRaffleItemCreateRequest(
         final String itemName,
         final String itemDescription,
-        final double itemOriginalPrice,
-        final double rafflePrice,
+        final BigDecimal itemOriginalPrice,
+        final BigDecimal rafflePrice,
         final LocalDateTime raffleStartDate,
         final LocalDateTime raffleEndDate,
         final LocalDateTime drawDate,

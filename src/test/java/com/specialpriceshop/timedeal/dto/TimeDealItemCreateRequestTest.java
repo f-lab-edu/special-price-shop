@@ -1,7 +1,7 @@
 package com.specialpriceshop.timedeal.dto;
 
 import static com.specialpriceshop.fixture.StockCreateRequestFixture.createStockCreateRequest;
-import static com.specialpriceshop.fixture.TimeDealItemCreateRequestFixture.createTimedealItemCreateRequest;
+import static com.specialpriceshop.fixture.timedeal.TimeDealItemCreateRequestFixture.createTimedealItemCreateRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
