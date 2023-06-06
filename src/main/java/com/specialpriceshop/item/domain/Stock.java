@@ -35,10 +35,12 @@ public class Stock extends BaseTimeEntity {
 
     @Builder
     public Stock(
+        final Long id,
         final String optionName,
         final long quantity,
         final BigDecimal addPrice
     ) {
+        this.id = id;
         this.optionName = optionName;
         this.quantity = quantity;
         this.addPrice = addPrice;

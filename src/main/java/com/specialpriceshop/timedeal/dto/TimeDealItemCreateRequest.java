@@ -41,7 +41,8 @@ public class TimeDealItemCreateRequest {
     private LocalDateTime timeDealEndDate;
 
     @Valid
-    private List<StockCreateRequest> stocks = new ArrayList<>();
+    @NotEmpty
+    private List<@Valid StockCreateRequest> stocks = new ArrayList<>();
 
     public TimeDealItemCreateRequest(
         final String itemName,

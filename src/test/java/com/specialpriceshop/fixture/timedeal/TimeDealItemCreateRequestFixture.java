@@ -1,4 +1,4 @@
-package com.specialpriceshop.fixture;
+package com.specialpriceshop.fixture.timedeal;
 
 import com.specialpriceshop.item.dto.StockCreateRequest;
 import com.specialpriceshop.timedeal.dto.TimeDealItemCreateRequest;
@@ -40,7 +40,7 @@ public class TimeDealItemCreateRequestFixture {
             itemDescription,
             itemOriginalPrice,
             timeDealPrice,
-            LocalDateTime.now(),
+            LocalDateTime.now().plusHours(1L),
             LocalDateTime.now().plusDays(3L),
             stocks
         );
