@@ -42,7 +42,7 @@ public class TimeDealItemCreateRequest {
 
     @Valid
     @NotEmpty
-    private List<StockCreateRequest> stocks = new ArrayList<>();
+    private List<@Valid StockCreateRequest> stocks = new ArrayList<>();
 
     public TimeDealItemCreateRequest(
         final String itemName,

@@ -16,10 +16,12 @@ class TimeDealTest {
     @Test
     @DisplayName("입력시간에 타임딜이 진행중이다")
     void isAvailable_progress() {
+        final LocalDateTime now = LocalDateTime.now();
+
         final TimeDeal timeDeal = createTimeDeal(
             BigDecimal.valueOf(1000L),
-            LocalDateTime.now().minusDays(1L),
-            LocalDateTime.now().plusDays(1L),
+            now.minusDays(1L),
+            now.plusDays(1L),
             new Item("상품", "설명", BigDecimal.valueOf(1000L)));
 
         assertTrue(timeDeal.isAvailable(LocalDateTime.now()));
@@ -28,18 +30,21 @@ class TimeDealTest {
     @Test
     @DisplayName("입력시간에 타임딜이 진행중아닌 경우")
     void isAvailable_not_progress() {
+        final LocalDateTime now = LocalDateTime.now();
+
         final TimeDeal timeDeal = createTimeDeal(
             BigDecimal.valueOf(1000L),
-            LocalDateTime.now().minusDays(1L),
-            LocalDateTime.now().plusDays(1L),
+            now.minusDays(1L),
+            now.plusDays(1L),
             new Item("상품", "설명", BigDecimal.valueOf(1000L)));
 
-        assertFalse(timeDeal.isAvailable(LocalDateTime.now().minusDays(2L)));
+        assertFalse(timeDeal.isAvailable(now.minusDays(2L)));
     }
 
     @Test
     @DisplayName("상품금액을 계산한다.")
     void calcAmount() {
+        final LocalDateTime now = LocalDateTime.now();
         final long stockId = 1L;
         final long orderQuantity = 10L;
         final BigDecimal timeDealPrice = BigDecimal.valueOf(1000L);
@@ -54,8 +59,8 @@ class TimeDealTest {
 
         final TimeDeal timeDeal = createTimeDeal(
             timeDealPrice,
-            LocalDateTime.now().minusDays(1L),
-            LocalDateTime.now().plusDays(1L),
+            now.minusDays(1L),
+            now.plusDays(1L),
             fixtureItem
         );
 
