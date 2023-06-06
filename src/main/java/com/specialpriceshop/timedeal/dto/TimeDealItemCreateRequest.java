@@ -3,6 +3,7 @@ package com.specialpriceshop.timedeal.dto;
 import com.specialpriceshop.item.domain.Item;
 import com.specialpriceshop.item.dto.StockCreateRequest;
 import com.specialpriceshop.timedeal.domain.TimeDeal;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,9 +28,9 @@ public class TimeDealItemCreateRequest {
     @NotNull
     private String itemDescription;
 
-    private double itemOriginalPrice;
+    private BigDecimal itemOriginalPrice;
 
-    private double timeDealPrice;
+    private BigDecimal timeDealPrice;
 
     @NotNull
     @FutureOrPresent
@@ -45,8 +46,8 @@ public class TimeDealItemCreateRequest {
     public TimeDealItemCreateRequest(
         final String itemName,
         final String itemDescription,
-        final double itemOriginalPrice,
-        final double timeDealPrice,
+        final BigDecimal itemOriginalPrice,
+        final BigDecimal timeDealPrice,
         final LocalDateTime timeDealStartDate,
         final LocalDateTime timeDealEndDate,
         final List<StockCreateRequest> stocks) {

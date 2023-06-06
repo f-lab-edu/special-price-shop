@@ -10,8 +10,8 @@ public class RaffleItemCreateRequestFixture {
     public static RaffleItemCreateRequest createRaffleItemCreateRequest(
         final String itemName,
         final String itemDescription,
-        final double itemOriginalPrice,
-        final double rafflePrice,
+        final BigDecimal itemOriginalPrice,
+        final BigDecimal rafflePrice,
         final List<StockCreateRequest> stocks
     ) {
         return new RaffleItemCreateRequest(

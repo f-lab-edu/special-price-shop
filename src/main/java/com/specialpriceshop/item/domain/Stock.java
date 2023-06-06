@@ -1,6 +1,7 @@
 package com.specialpriceshop.item.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Stock extends BaseTimeEntity {
 
     private long quantity;
 
-    private double addPrice;
+    private BigDecimal addPrice;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
@@ -34,10 +35,9 @@ public class Stock extends BaseTimeEntity {
 
     @Builder
     public Stock(
-        final Long id,
         final String optionName,
         final long quantity,
-        final double addPrice
+        final BigDecimal addPrice
     ) {
         this.optionName = optionName;
         this.quantity = quantity;

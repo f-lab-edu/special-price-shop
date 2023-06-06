@@ -1,6 +1,7 @@
 package com.specialpriceshop.item.dto;
 
 import com.specialpriceshop.item.domain.Stock;
+import java.math.BigDecimal;
 import javax.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,12 +16,12 @@ public class StockCreateRequest {
 
     private long quantity;
 
-    private double addPrice;
+    private BigDecimal addPrice;
 
     public StockCreateRequest(
         final String optionName,
         final long quantity,
-        final double addPrice
+        final BigDecimal addPrice
     ) {
         this.optionName = optionName;
         this.quantity = quantity;

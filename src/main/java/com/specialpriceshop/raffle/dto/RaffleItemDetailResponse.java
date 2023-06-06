@@ -2,6 +2,7 @@ package com.specialpriceshop.raffle.dto;
 
 import com.specialpriceshop.item.dto.StockResponse;
 import com.specialpriceshop.raffle.domain.Raffle;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,9 +12,9 @@ public record RaffleItemDetailResponse(Long raffleId,
                                        String itemName,
                                        String itemDescription,
 
-                                       double itemOriginalPrice,
+                                       BigDecimal itemOriginalPrice,
 
-                                       double rafflePrice,
+                                       BigDecimal rafflePrice,
 
                                        LocalDateTime raffleStartDate,
 
