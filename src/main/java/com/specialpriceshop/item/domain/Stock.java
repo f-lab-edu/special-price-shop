@@ -68,4 +68,8 @@ public class Stock extends BaseTimeEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public boolean isOrderable(final long orderQuantity) {
+        return this.quantity >= orderQuantity;
+    }
 }

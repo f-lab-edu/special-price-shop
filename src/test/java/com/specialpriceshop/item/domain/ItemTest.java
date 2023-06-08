@@ -1,10 +1,14 @@
 package com.specialpriceshop.item.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.specialpriceshop.fixture.item.ItemFixture;
 import com.specialpriceshop.fixture.item.StockFixture;
 import com.specialpriceshop.item.exception.NotFoundStockException;
+import com.specialpriceshop.item.exception.OutOfStockException;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,7 +44,7 @@ class ItemTest {
     }
 
     @Test
-    @DisplayName("빈 Stock객체는 추가 하지 않는다")
+    @DisplayName("주문한상품의 가격을 계산한다.")
     void calcAmount() {
         final Long stockId = 1L;
         final BigDecimal price = BigDecimal.valueOf(100);
@@ -50,8 +54,9 @@ class ItemTest {
         final Stock stock = StockFixture.create(1L, 10L, "옵션1", BigDecimal.valueOf(1000));
         item.addStock(stock);
 
-        assertEquals(item.calcAmount(stockId, price, quantity),price.add(stock.getAddPrice()).multiply(
-            BigDecimal.valueOf(quantity)));
+        assertEquals(item.calcAmount(stockId, price, quantity),
+            price.add(stock.getAddPrice()).multiply(
+                BigDecimal.valueOf(quantity)));
     }
 
     @Test
@@ -64,5 +69,31 @@ class ItemTest {
         final Item item = ItemFixture.create("상품", BigDecimal.valueOf(10000));
 
         assertThrows(NotFoundStockException.class, () -> item.calcAmount(stockId, price, quantity));
+    }
+
+    @Test
+    @DisplayName("주문가능한 재고인지 검증한다")
+    void isOrderable() {
+        final long stockId = 1L;
+        final long orderQuantity = 5L;
+
+        final Item item = ItemFixture.create("상품", BigDecimal.valueOf(10000));
+        final Stock stock = StockFixture.create(stockId, 10L, "옵션1", BigDecimal.valueOf(1000));
+        item.addStock(stock);
+
+        assertDoesNotThrow(() -> item.isOrderable(stockId, orderQuantity));
+    }
+
+    @Test
+    @DisplayName("주문가능한 재고가 아닐경우 throw한다")
+    void isOrderable_outOfStock() {
+        final long stockId = 1L;
+        final long quantity = 10L;
+
+        final Item item = ItemFixture.create("상품", BigDecimal.valueOf(10000));
+        final Stock stock = StockFixture.create(stockId, quantity, "옵션1", BigDecimal.valueOf(1000));
+        item.addStock(stock);
+
+        assertThrows(OutOfStockException.class,() -> item.isOrderable(stockId, quantity + 1));
     }
 }

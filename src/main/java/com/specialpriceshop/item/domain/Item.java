@@ -2,6 +2,7 @@ package com.specialpriceshop.item.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
 import com.specialpriceshop.item.exception.NotFoundStockException;
+import com.specialpriceshop.item.exception.OutOfStockException;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,6 +61,15 @@ public class Item extends BaseTimeEntity {
         return timeDealPrice
             .add(findStocks(stockId).getAddPrice())
             .multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public void isOrderable(
+        final Long stockId,
+        final long orderQuantity
+    ) {
+        if (!findStocks(stockId).isOrderable(orderQuantity)) {
+            throw new OutOfStockException();
+        }
     }
 
     private Stock findStocks(final Long stockId) {

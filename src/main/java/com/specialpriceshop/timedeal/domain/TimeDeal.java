@@ -55,4 +55,12 @@ public class TimeDeal extends BaseTimeEntity {
     public BigDecimal calcAmount(final Long stockId, final long quantity) {
         return item.calcAmount(stockId, timeDealPrice, quantity);
     }
+
+    public void isOrderable(
+        final Long stockId,
+        final long orderQuantity
+    ) {
+        item.isOrderable(stockId, orderQuantity);
+    }
+
 }
