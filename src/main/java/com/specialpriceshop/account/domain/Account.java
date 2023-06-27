@@ -5,12 +5,14 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account extends BaseTimeEntity {
 
     @EmbeddedId
@@ -22,15 +24,20 @@ public class Account extends BaseTimeEntity {
 
     private String nickname;
 
+    private String phone;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Builder
     public Account(
         final String email,
         final String password,
         final String nickname,
+        final String phone,
         final Role role
     ) {
+        this.phone = phone;
         this.accountId = AccountId.create();
         this.email = email;
         this.password = password;
