@@ -24,7 +24,10 @@ public enum ErrorCode {
 
     //Stock
     STOCK_NOT_FOUND(404, "S001", "존재하지 않는 옵션 입니다."),
-    OUT_OF_STOCK(404, "S002", "주문 가능한 상품의 재고가 모자랍니다.");
+    OUT_OF_STOCK(404, "S002", "주문 가능한 상품의 재고가 모자랍니다."),
+
+    //Account
+    EMAIL_DUPLICATED_EXCEPTION(409, "A001", "이미 가입된 이메일 입니다.");
 
     private final String code;
     private final String message;
