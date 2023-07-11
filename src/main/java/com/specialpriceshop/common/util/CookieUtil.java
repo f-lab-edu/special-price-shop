@@ -1,51 +1,38 @@
 package com.specialpriceshop.common.util;
 
+import java.time.Duration;
 import lombok.experimental.UtilityClass;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+import org.springframework.http.ResponseCookie;
 
 @UtilityClass
 public class CookieUtil {
 
-    public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
-        Cookie[] cookies = request.getCookies();
-
-        if (cookies != null && cookies.length > 0) {
-            for (Cookie cookie : cookies) {
-                if (name.equals(cookie.getName())) {
-                    return Optional.of(cookie);
-                }
-            }
-        }
-        return Optional.empty();
-    }
-
-    public static Cookie create(
+    public static ResponseCookie create(
         final String name,
         final String value,
         final long maxAgeMillis,
         final String domain
     ) {
-        Cookie cookie = new Cookie(name, value);
-        cookie.setDomain(domain);
-        cookie.setPath("/");
-        cookie.setMaxAge((int) maxAgeMillis / 1000);
-        cookie.setHttpOnly(true);
-//        cookie.setSecure(true);
-        return cookie;
+
+        return ResponseCookie.from(name, value)
+            .domain(domain)
+            .path("/")
+            .maxAge(Duration.ofMillis(maxAgeMillis))
+            .httpOnly(true)
+//            .secure(true)
+            .build();
     }
 
-    public static Cookie deleteCookie(
+    public static ResponseCookie deleteCookie(
         String name,
-        String cookieDomain) {
-        Cookie cookie = new Cookie(name, "");
-        cookie.setValue("");
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        cookie.setDomain(cookieDomain);
-        return cookie;
+        String domain) {
+        return ResponseCookie.from(name, "")
+            .domain(domain)
+            .path("/")
+            .maxAge(0)
+            .httpOnly(true)
+//            .secure(true)
+            .build();
     }
 }
 

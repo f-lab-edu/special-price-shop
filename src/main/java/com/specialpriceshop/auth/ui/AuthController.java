@@ -11,12 +11,14 @@ import com.specialpriceshop.common.config.annotation.AuthUser;
 import com.specialpriceshop.common.util.CookieUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.validation.Valid;
 
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpHeaders.SET_COOKIE;
 
 @RestController
@@ -42,40 +44,71 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody final LoginRequest loginRequest) {
+    public ResponseEntity<Void> login(
+        @Valid @RequestBody final LoginRequest loginRequest) {
 
         final TokenResponse tokenResponse = loginService.login(loginRequest);
 
-        Cookie refreshToken = CookieUtil.create(
-            "RefreshToken",
+        final HttpHeaders httpHeaders = createLoginHeader(
             tokenResponse.refreshToken(),
             tokenResponse.refreshTokenValidityInMilliseconds(),
-            domain
+            tokenResponse.accessToken()
         );
 
         return ResponseEntity.ok()
-            .header(SET_COOKIE, refreshToken.toString())
-            .body(new LoginResponse(tokenResponse.accessToken()));
+            .headers(httpHeaders)
+            .build();
     }
 
     @DeleteMapping("/logout")
     public ResponseEntity<Void> logout(@AuthUser final AccountId userId) {
 
-        final Cookie expireRefreshToken = CookieUtil.deleteCookie(
-            "RefreshToken",
-            domain
-        );
-
         logoutService.logout(userId);
 
-        return ResponseEntity.ok()
-            .header(SET_COOKIE, expireRefreshToken.toString())
+        return ResponseEntity.noContent()
+            .headers(createLogoutHeader())
             .build();
     }
 
     @PostMapping("/reissue")
-    public ResponseEntity<LoginResponse> reissue(@CookieValue("RefreshToken") final String refreshToken) {
-        return ResponseEntity.ok(tokenReissueService.reIssue(refreshToken));
+    public ResponseEntity<Void> reissue(
+        @CookieValue("refresh") final String refreshToken) {
+        final LoginResponse loginResponse = tokenReissueService.reIssue(refreshToken);
+
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setBearerAuth(loginResponse.accessToken());
+
+        return ResponseEntity.ok()
+            .headers(httpHeaders)
+            .build();
+    }
+
+    private HttpHeaders createLoginHeader(
+        final String refreshToken,
+        final long tokenValidityInMill,
+        final String accessToken
+    ) {
+        final ResponseCookie cookie = CookieUtil.create(
+            "refresh",
+            refreshToken,
+            tokenValidityInMill,
+            domain
+        );
+
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(SET_COOKIE, cookie.toString());
+        httpHeaders.setBearerAuth(accessToken);
+        return httpHeaders;
+    }
+
+    private HttpHeaders createLogoutHeader() {
+        ResponseCookie cookie = CookieUtil.deleteCookie("refresh", domain);
+
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(SET_COOKIE, cookie.toString());
+        httpHeaders.add(AUTHORIZATION, "");
+
+        return httpHeaders;
     }
 
 }

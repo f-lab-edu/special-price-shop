@@ -1,5 +1,6 @@
 package com.specialpriceshop.auth.dto;
 
+import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,10 @@ import org.springframework.security.core.Authentication;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LoginRequest {
 
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String password;
 
     public Authentication toAuthentication() {

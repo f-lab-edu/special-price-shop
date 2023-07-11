@@ -38,7 +38,8 @@ public class Account extends BaseTimeEntity {
         final String nickname,
         final String phone,
         final Role role,
-        final boolean remove) {
+        final boolean remove
+    ) {
         this.phone = phone;
         this.remove = remove;
         this.accountId = AccountId.create();
