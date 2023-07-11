@@ -29,15 +29,18 @@ public class Account extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private boolean remove;
+
     @Builder
     public Account(
         final String email,
         final String password,
         final String nickname,
         final String phone,
-        final Role role
-    ) {
+        final Role role,
+        final boolean remove) {
         this.phone = phone;
+        this.remove = remove;
         this.accountId = AccountId.create();
         this.email = email;
         this.password = password;

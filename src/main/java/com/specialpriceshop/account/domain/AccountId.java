@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccountId implements Serializable {
 
-    private String id;
+    private String value;
 
     private AccountId(String uuid) {
-        this.id = uuid;
+        this.value = uuid;
     }
 
     public static AccountId create() {
