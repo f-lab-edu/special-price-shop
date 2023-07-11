@@ -11,6 +11,7 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(500, "C004", "Server Error"),
     INVALID_TYPE_VALUE(400, "C005", " Invalid Type Value"),
     HANDLE_ACCESS_DENIED(403, "C006", "Access is Denied"),
+    NOT_FOUND_COOKIE(404  , "C007" ,"존재하지 않는 쿠키값 입니다" ),
 
     //TimeDeal
     TIME_DEAL_START_DATE_INVALID(400, "T001", "시작시간과 종료시간이 올바르지 않습니다."),
@@ -27,7 +28,13 @@ public enum ErrorCode {
     OUT_OF_STOCK(404, "S002", "주문 가능한 상품의 재고가 모자랍니다."),
 
     //Account
-    EMAIL_DUPLICATED_EXCEPTION(409, "A001", "이미 가입된 이메일 입니다.");
+    EMAIL_DUPLICATED_EXCEPTION(409, "A001", "이미 가입된 이메일 입니다."),
+    ACCOUNT_NOT_FOUND(404, "A002", "존재하지 않는 회원입니다."),
+
+    //AUTH,
+    UNAUTHORIZED(401, "AUTH001", "잘못된 인증 입니다."),
+    BAD_CREDENTIAL(401, "AUTH002", "아이디 혹은 비밀번호가 틀립니다."),
+    DELETE_USER(400, "AUTH003", "탈퇴한 사용자 입니다");
 
     private final String code;
     private final String message;
