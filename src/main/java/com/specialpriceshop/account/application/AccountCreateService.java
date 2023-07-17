@@ -26,7 +26,7 @@ public class AccountCreateService {
         return accountRepository
             .save(create)
             .getAccountId()
-            .getId();
+            .getValue();
     }
 
 

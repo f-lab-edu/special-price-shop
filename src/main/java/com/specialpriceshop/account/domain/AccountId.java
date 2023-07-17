@@ -2,6 +2,7 @@ package com.specialpriceshop.account.domain;
 
 import com.fasterxml.uuid.Generators;
 import java.io.Serializable;
+import javax.persistence.Column;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccountId implements Serializable {
 
-    private String id;
+    @Column(name = "id")
+    private String value;
 
     private AccountId(String uuid) {
-        this.id = uuid;
+        this.value = uuid;
     }
 
     public static AccountId create() {
