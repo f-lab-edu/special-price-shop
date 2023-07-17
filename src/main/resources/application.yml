@@ -17,6 +17,13 @@ spring:
     username: root
     password: 1234
 
+custom:
+  cookieDomain: localhost
+  jwt:
+    secretKey: c81cc9e3bd85b4efa605703f92eb7148fe5394fa68c0fea13834ab5f2ab2adeac6af25b9f07306dec810969176d6d03a538f00c6556fadb6ab212be25c68ca55
+    access-token-validity-in-milliseconds: 10800000
+    refresh-token-validity-in-milliseconds: 1209600000
+
 logging:
   level:
     org.hibernate.type.descriptor.sql: trace
