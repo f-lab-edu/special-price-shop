@@ -9,11 +9,8 @@ import com.specialpriceshop.common.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingRequestCookieException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -69,29 +66,5 @@ public class GlobalExceptionHandler {
         final ErrorResponse response = ErrorResponse.of(errorCode);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-    @ExceptionHandler(value = BadCredentialsException.class)
-    protected ResponseEntity<ErrorResponse> handleBadCredentialsException(
-        BadCredentialsException ex) {
-        log.error("BadCredentialsException :: ", ex);
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.BAD_CREDENTIAL);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
 
-    @ExceptionHandler(value = MissingRequestCookieException.class)
-    protected ResponseEntity<ErrorResponse> handleMissingRequestCookieException(
-        MissingRequestCookieException ex
-    ) {
-        log.error("MissingRequestCookieException ", ex);
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.NOT_FOUND_COOKIE);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    @ExceptionHandler(value = DisabledException.class)
-    protected ResponseEntity<ErrorResponse> handleDisabledException(
-        DisabledException ex
-    ) {
-        log.error("DisabledException ", ex);
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.DELETE_USER);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
 }
