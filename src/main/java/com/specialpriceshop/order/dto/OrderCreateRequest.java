@@ -1,5 +1,6 @@
 package com.specialpriceshop.order.dto;
 
+import com.specialpriceshop.account.domain.AccountId;
 import com.specialpriceshop.order.domain.Order;
 import com.specialpriceshop.order.domain.OrderStock;
 import com.specialpriceshop.order.domain.Orderline;
@@ -34,7 +35,7 @@ public class OrderCreateRequest {
     }
 
     public Order toEntity(
-        final String userId,
+        final AccountId accountId,
         final TimeDeal timeDeal
     ) {
         final OrderStock orderStock = new OrderStock(quantity, stockId);
@@ -43,7 +44,7 @@ public class OrderCreateRequest {
 
         return Order.timeDealOrder(
             orderline,
-            userId,
+            accountId,
             address,
             timeDeal.getTimeDealTimeInfo().getDealEndDate(),
             payment

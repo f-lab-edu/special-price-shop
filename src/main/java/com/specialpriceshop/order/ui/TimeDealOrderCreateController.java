@@ -1,5 +1,7 @@
 package com.specialpriceshop.order.ui;
 
+import com.specialpriceshop.account.domain.AccountId;
+import com.specialpriceshop.common.config.annotation.AuthUser;
 import com.specialpriceshop.order.application.command.OrderCreateService;
 import com.specialpriceshop.order.dto.OrderCreateRequest;
 import java.net.URI;
@@ -21,14 +23,16 @@ public class TimeDealOrderCreateController {
 
     @PostMapping("/time-deals/{time-deal-id}")
     public ResponseEntity<Void> createTimeDealOrder(
+        @AuthUser final AccountId accountId,
         @PathVariable("time-deal-id") final Long timeDealId,
         @RequestBody @Valid OrderCreateRequest orderCreateRequest
     ) {
-        //FIXME 로그인관련 기능 구현시 제외
-        final String userId = "1234-1234-1234-1234";
 
-        final Long createOrderId = orderCreateService.createTimeDealOrder(timeDealId,
-            orderCreateRequest, userId);
+        final Long createOrderId = orderCreateService.createTimeDealOrder(
+            timeDealId,
+            orderCreateRequest,
+            accountId
+        );
 
         return ResponseEntity
             .created(URI.create("/orders/" + createOrderId))

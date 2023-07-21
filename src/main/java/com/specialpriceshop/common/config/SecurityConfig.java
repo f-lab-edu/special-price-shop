@@ -68,8 +68,13 @@ public class SecurityConfig {
     }
 
     @Bean
+    public JwtTokenParser jwtTokenParser() {
+        return new JwtTokenParser(secretKey);
+    }
+
+    @Bean
     public JwtFilter jwtFilter() {
-        return new JwtFilter(new JwtTokenParser(secretKey));
+        return new JwtFilter(jwtTokenParser());
     }
 
     @Bean

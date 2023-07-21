@@ -6,7 +6,6 @@ import com.specialpriceshop.account.domain.Account;
 import com.specialpriceshop.account.exception.AccountNotFoundException;
 import com.specialpriceshop.account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -31,7 +30,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails toUserDetails(
         final Account account) {
         return builder()
-            .username(account.getAccountId().getValue())
+            .username(account.getId().getValue())
             .password(account.getPassword())
             .authorities(new SimpleGrantedAuthority(account.getRole().name()))
             .disabled(account.isRemove())
