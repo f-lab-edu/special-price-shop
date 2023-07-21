@@ -1,14 +1,10 @@
 package com.specialpriceshop.timedeal.dto;
 
-import com.specialpriceshop.item.domain.Item;
 import com.specialpriceshop.item.dto.StockCreateRequest;
-import com.specialpriceshop.timedeal.domain.TimeDeal;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Stream;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
@@ -60,25 +56,4 @@ public class TimeDealItemCreateRequest {
         this.timeDealEndDate = timeDealEndDate;
         this.stocks = stocks;
     }
-
-    public TimeDeal toEntity() {
-        final Item item = Item.builder()
-            .name(itemName)
-            .description(itemDescription)
-            .originalPrice(itemOriginalPrice)
-            .build();
-
-        Stream.ofNullable(stocks)
-            .flatMap(Collection::stream)
-            .map(StockCreateRequest::toEntity)
-            .forEach(item::addStock);
-
-        return TimeDeal.builder()
-            .timeDealPrice(timeDealPrice)
-            .timeDealStartDate(timeDealStartDate)
-            .timeDealEndDate(timeDealEndDate)
-            .item(item)
-            .build();
-    }
-
 }
