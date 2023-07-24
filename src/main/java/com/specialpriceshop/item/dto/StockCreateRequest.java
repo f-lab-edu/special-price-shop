@@ -1,6 +1,5 @@
 package com.specialpriceshop.item.dto;
 
-import com.specialpriceshop.item.domain.Stock;
 import java.math.BigDecimal;
 import javax.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
@@ -27,13 +26,4 @@ public class StockCreateRequest {
         this.quantity = quantity;
         this.addPrice = addPrice;
     }
-
-    public Stock toEntity() {
-        return  Stock.builder()
-            .optionName(optionName)
-            .quantity(quantity)
-            .addPrice(addPrice)
-            .build();
-    }
-
 }

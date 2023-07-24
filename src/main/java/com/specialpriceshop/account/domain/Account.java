@@ -1,6 +1,8 @@
 package com.specialpriceshop.account.domain;
 
 import com.specialpriceshop.common.entity.BaseTimeEntity;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,7 +18,9 @@ import lombok.NoArgsConstructor;
 public class Account extends BaseTimeEntity {
 
     @EmbeddedId
-    private AccountId accountId;
+    @AttributeOverride(name = "value",
+        column = @Column(name = "id"))
+    private AccountId id;
 
     private String email;
 
@@ -42,7 +46,7 @@ public class Account extends BaseTimeEntity {
     ) {
         this.phone = phone;
         this.remove = remove;
-        this.accountId = AccountId.create();
+        this.id = AccountId.create();
         this.email = email;
         this.password = password;
         this.nickname = nickname;

@@ -10,7 +10,6 @@ import com.specialpriceshop.auth.domain.RefreshTokenValidator;
 import com.specialpriceshop.auth.dto.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,7 +40,7 @@ public class TokenReissueService {
             .orElseThrow(AccountNotFoundException::new);
 
         final UserDetails principal = User.builder()
-            .username(account.getAccountId().getValue())
+            .username(account.getId().getValue())
             .password("N/A")
             .authorities(account.getRole().name())
             .build();

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.specialpriceshop.common.config.SecurityConfig;
 import com.specialpriceshop.item.dto.StockCreateRequest;
 import com.specialpriceshop.timedeal.application.command.TimeDealCreateService;
 import com.specialpriceshop.timedeal.dto.TimeDealItemCreateRequest;
@@ -18,12 +19,18 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(TimeDealItemCreateController.class)
+@WebMvcTest(controllers = TimeDealItemCreateController.class,
+    excludeAutoConfiguration = SecurityAutoConfiguration.class,
+    excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)})
 class TimeDealItemCreateControllerTest {
 
     @Autowired

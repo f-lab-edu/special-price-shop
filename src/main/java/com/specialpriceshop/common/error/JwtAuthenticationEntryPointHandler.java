@@ -10,10 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
 public class JwtAuthenticationEntryPointHandler implements AuthenticationEntryPoint {
 
     @Override

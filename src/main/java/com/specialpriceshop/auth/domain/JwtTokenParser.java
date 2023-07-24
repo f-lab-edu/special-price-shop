@@ -1,7 +1,6 @@
 package com.specialpriceshop.auth.domain;
 
 
-
 import static com.specialpriceshop.auth.domain.JwtTokenProvider.AUTHORITIES_KEY;
 import static com.specialpriceshop.auth.domain.JwtTokenProvider.AUTHORITY_DELIMITER;
 import static com.specialpriceshop.auth.domain.JwtTokenProvider.TOKEN_TYPE_KEY;
@@ -15,7 +14,6 @@ import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,14 +21,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
-@Component
 public class JwtTokenParser {
 
     private final JwtParser jwtParser;
 
-    public JwtTokenParser(@Value("${custom.jwt.secretKey}") final String secretKey) {
+    public JwtTokenParser(final String secretKey) {
         final Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
         this.jwtParser = Jwts.parserBuilder().setSigningKey(key).build();
     }

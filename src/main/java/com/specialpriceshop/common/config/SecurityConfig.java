@@ -1,8 +1,9 @@
 package com.specialpriceshop.common.config;
 
+import com.specialpriceshop.auth.domain.JwtTokenParser;
 import com.specialpriceshop.auth.filter.JwtFilter;
 import com.specialpriceshop.common.error.JwtAuthenticationEntryPointHandler;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,11 +18,13 @@ import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtFilter jwtFilter;
-    private final JwtAuthenticationEntryPointHandler jwtAuthenticationEntryPointHandler;
+    private final String secretKey;
+
+    public SecurityConfig(@Value("${custom.jwt.secretKey}") final String secretKey) {
+        this.secretKey = secretKey;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -52,9 +55,9 @@ public class SecurityConfig {
             .authenticated()
 
             .and()
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
             .exceptionHandling()
-            .authenticationEntryPoint(jwtAuthenticationEntryPointHandler);
+            .authenticationEntryPoint(jwtAuthenticationEntryPointHandler());
 
         return http.build();
     }
@@ -62,5 +65,20 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public JwtTokenParser jwtTokenParser() {
+        return new JwtTokenParser(secretKey);
+    }
+
+    @Bean
+    public JwtFilter jwtFilter() {
+        return new JwtFilter(jwtTokenParser());
+    }
+
+    @Bean
+    public JwtAuthenticationEntryPointHandler jwtAuthenticationEntryPointHandler() {
+        return new JwtAuthenticationEntryPointHandler();
     }
 }

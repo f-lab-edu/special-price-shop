@@ -1,6 +1,7 @@
 package com.specialpriceshop.order.application.command;
 
 
+import com.specialpriceshop.account.domain.AccountId;
 import com.specialpriceshop.order.domain.Order;
 import com.specialpriceshop.order.dto.OrderCreateRequest;
 import com.specialpriceshop.order.repository.OrderRepository;
@@ -22,14 +23,14 @@ public class OrderCreateService {
     public Long createTimeDealOrder(
         final Long timeDealId,
         final OrderCreateRequest orderCreateRequest,
-        final String userId
+        final AccountId accountId
     ) {
         final TimeDeal timeDeal = timeDealRepository.findById(timeDealId)
             .orElseThrow(TimeDealNotFoundException::new);
 
         validate(timeDeal, orderCreateRequest);
 
-        final Order order = orderCreateRequest.toEntity(userId, timeDeal);
+        final Order order = orderCreateRequest.toEntity(accountId, timeDeal);
 
         return orderRepository.save(order).getId();
     }

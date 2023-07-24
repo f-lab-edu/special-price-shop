@@ -1,16 +1,21 @@
 package com.specialpriceshop.account.domain;
 
 import com.fasterxml.uuid.Generators;
+import java.io.Serial;
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Embeddable
 public class AccountId implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 8170920426703866878L;
     @Column(name = "id")
     private String value;
 

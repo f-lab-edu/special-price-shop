@@ -1,5 +1,6 @@
 package com.specialpriceshop.order.domain;
 
+import com.specialpriceshop.account.domain.AccountId;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Order {
     @JoinColumn(name = "order_line_id")
     private Orderline orderline;
 
-    private String userId;
+    private AccountId accountId;
 
     private String address;
 
@@ -51,14 +52,15 @@ public class Order {
         final OrderType orderType,
         final OrderStatus orderStatus,
         final Orderline orderline,
-        final String userId,
+        final AccountId accountId,
         final String address,
         final LocalDateTime paymentDueDate,
-        final Payment payment) {
+        final Payment payment
+    ) {
         this.orderType = orderType;
         this.orderStatus = orderStatus;
         this.orderline = orderline;
-        this.userId = userId;
+        this.accountId = accountId;
         this.address = address;
         this.paymentDueDate = paymentDueDate;
         this.payment = payment;
@@ -66,15 +68,16 @@ public class Order {
 
     public static Order timeDealOrder(
         final Orderline orderline,
-        final String userId,
+        final AccountId accountId,
         final String address,
         final LocalDateTime paymentDueDate,
-        final Payment payment) {
+        final Payment payment
+    ) {
         return Order.builder()
             .orderType(OrderType.TIME_DEAL)
             .orderStatus(OrderStatus.ORDER)
             .orderline(orderline)
-            .userId(userId)
+            .accountId(accountId)
             .address(address)
             .paymentDueDate(paymentDueDate)
             .payment(payment)
