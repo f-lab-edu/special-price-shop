@@ -1,8 +1,9 @@
 package com.specialpriceshop.timedeal.domain;
 
 import static com.specialpriceshop.fixture.timedeal.TimeDealFixture.createTimeDeal;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.specialpriceshop.item.domain.Item;
 import com.specialpriceshop.item.domain.Stock;
