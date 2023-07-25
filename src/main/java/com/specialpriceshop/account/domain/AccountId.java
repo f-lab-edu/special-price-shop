@@ -16,7 +16,7 @@ public class AccountId implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 8170920426703866878L;
-    @Column(name = "id")
+    @Column(name = "account_id")
     private String value;
 
     private AccountId(String uuid) {

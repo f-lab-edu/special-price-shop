@@ -18,23 +18,19 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
+    private static final String ROLE_PREFIX = "ROLE_";
     private final AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return accountRepository.findByEmail(username)
-            .map(this::toUserDetails)
+        return accountRepository.findByEmail(username).map(this::toUserDetails)
             .orElseThrow(AccountNotFoundException::new);
     }
 
-    public UserDetails toUserDetails(
-        final Account account) {
-        return builder()
-            .username(account.getId().getValue())
-            .password(account.getPassword())
-            .authorities(new SimpleGrantedAuthority(account.getRole().name()))
-            .disabled(account.isRemove())
-            .build();
+    public UserDetails toUserDetails(final Account account) {
+        return builder().username(account.getId().getValue()).password(account.getPassword())
+            .authorities(new SimpleGrantedAuthority(ROLE_PREFIX + account.getRole().name()))
+            .disabled(account.isRemove()).build();
     }
 
 }

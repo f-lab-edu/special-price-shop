@@ -29,8 +29,8 @@ public class TimeDealQueryController {
 
     @GetMapping
     public ResponseEntity<Page<TimeDealItemResponse>> getRaffleItemResponseList(
-        @RequestParam final int page,
-        @RequestParam final int size
+        @RequestParam(name = "page", defaultValue = "0") final int page,
+        @RequestParam(name = "size", defaultValue = "10") final int size
     ) {
         return ResponseEntity.ok(
             timeDealQueryService.queryTimeDealList(PageRequest.of(page, size)));
