@@ -44,4 +44,18 @@ public class Payment extends BaseTimeEntity {
         this.paymentStatus = paymentStatus;
         this.actionAt = actionAt;
     }
+
+    public void pay(final BigDecimal requestAmount) {
+        paymentAfterCheck();
+        if (requestAmount.compareTo(this.amount) != 0) {
+            throw new RuntimeException("잘못된 금액");
+        }
+        paymentStatus = PaymentStatus.PAYMENT;
+    }
+
+    public void paymentAfterCheck() {
+        if (!paymentStatus.equals(PaymentStatus.NONE)) {
+            throw new RuntimeException("이미 결제 되었거나 취소된 결제건");
+        }
+    }
 }

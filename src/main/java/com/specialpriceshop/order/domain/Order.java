@@ -1,6 +1,7 @@
 package com.specialpriceshop.order.domain;
 
 import com.specialpriceshop.account.domain.AccountId;
+import com.specialpriceshop.common.entity.BaseTimeEntity;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "purchase_orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order {
+public class Order extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,5 +83,11 @@ public class Order {
             .paymentDueDate(paymentDueDate)
             .payment(payment)
             .build();
+    }
+
+    public void isMyOrder(final AccountId accountId) {
+        if (!this.accountId.equals(accountId)) {
+            throw new RuntimeException("내주문이 아님");
+        }
     }
 }
