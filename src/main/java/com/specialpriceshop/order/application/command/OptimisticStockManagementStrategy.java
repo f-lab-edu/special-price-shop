@@ -10,7 +10,7 @@ public class OptimisticStockManagementStrategy implements StockManagementStrateg
 
     private final StockRepository stockRepository;
     @Override
-    public void decreaseStock(final Long stockId, final Long quantity) {
-        int i = stockRepository.optimisticDecrease(stockId, quantity);
+    public int decreaseStock(final Long stockId, final Long quantity) {
+       return stockRepository.optimisticDecrease(stockId, quantity);
     }
 }

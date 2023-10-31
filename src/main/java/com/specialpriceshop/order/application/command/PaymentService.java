@@ -2,10 +2,10 @@ package com.specialpriceshop.order.application.command;
 
 import com.specialpriceshop.account.domain.AccountId;
 import com.specialpriceshop.order.client.PaymentClient;
-import com.specialpriceshop.order.domain.Order;
 import com.specialpriceshop.order.domain.OrderStock;
 import com.specialpriceshop.order.dto.PaymentRequest;
 import com.specialpriceshop.order.repository.OrderRepository;
+import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -15,28 +15,43 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PaymentService {
 
-    private final OrderRepository orderRepository;
+    private final OrderManagement orderManagement;
     private final PaymentClient paymentClient;
     private final StockManagementStrategy stockManagementStrategy;
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+
+    //TODO 결제호출 -> db에 결제 완료 처리시 검증 -> 실패시 결제취소하기를 호출하는 방법
+    @Transactional(
+        isolation = Isolation.READ_COMMITTED)
     public void payment(
         final Long orderId,
         final AccountId accountId,
         final PaymentRequest paymentRequest
     ) {
-        Order order = orderRepository.findById(orderId)
-            .orElseThrow();
-        order.isMyOrder(accountId);
 
         boolean approvePayment = isApprovePayment(orderId, paymentRequest);
 
-        order.payment(paymentRequest.getAmount());
+        orderManagement.payment(
+            orderId,
+            paymentRequest.getAmount(),
+            accountId);
+
         if (!approvePayment) {
             paymentClient.cancelPayment(orderId, paymentRequest.getAmount());
         }
-        OrderStock orderStock = order.getOrderline().getOrderStock();
-        //TODO 재고차감 성공시 결제처리완료
-        stockManagementStrategy.decreaseStock(orderStock.getStockId(), orderStock.getQuantity());
+
+        OrderStock orderStock = orderManagement.getOrderStock(orderId);
+        decreaseStock(orderId, paymentRequest.getAmount(), orderStock);
+    }
+
+    private void decreaseStock(final Long orderId, final BigDecimal amount,
+        final OrderStock orderStock) {
+        int row = stockManagementStrategy.decreaseStock(orderStock.getStockId(),
+            orderStock.getQuantity());
+
+        if (row <= 0) {
+            paymentClient.cancelPayment(orderId, amount);
+            throw new RuntimeException("재고부족");
+        }
     }
 
     private boolean isApprovePayment(final Long orderId, final PaymentRequest paymentRequest) {
