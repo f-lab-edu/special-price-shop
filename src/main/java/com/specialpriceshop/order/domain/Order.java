@@ -2,6 +2,7 @@ package com.specialpriceshop.order.domain;
 
 import com.specialpriceshop.account.domain.AccountId;
 import com.specialpriceshop.common.entity.BaseTimeEntity;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -87,7 +88,11 @@ public class Order extends BaseTimeEntity {
 
     public void isMyOrder(final AccountId accountId) {
         if (!this.accountId.equals(accountId)) {
-            throw new RuntimeException("내주문이 아님");
+            throw new RuntimeException("내 주문이 아님");
         }
+    }
+
+    public void payment(final BigDecimal requestAmount) {
+        this.getPayment().pay(requestAmount);
     }
 }

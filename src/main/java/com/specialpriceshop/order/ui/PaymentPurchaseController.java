@@ -19,7 +19,7 @@ public class PaymentPurchaseController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/{payment-id}")
+    @PostMapping
     public ResponseEntity<Void> payment(
         @PathVariable("order-id") final Long orderId,
         @AuthUser final AccountId accountId,
