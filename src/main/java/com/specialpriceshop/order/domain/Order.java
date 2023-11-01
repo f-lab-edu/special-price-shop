@@ -2,6 +2,9 @@ package com.specialpriceshop.order.domain;
 
 import com.specialpriceshop.account.domain.AccountId;
 import com.specialpriceshop.common.entity.BaseTimeEntity;
+import com.specialpriceshop.order.exception.CheckPaymentAmount;
+import com.specialpriceshop.order.exception.NotAvailableException;
+import com.specialpriceshop.order.exception.NotMyOrderException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
@@ -88,11 +91,27 @@ public class Order extends BaseTimeEntity {
 
     public void isMyOrder(final AccountId accountId) {
         if (!this.accountId.equals(accountId)) {
-            throw new RuntimeException("내 주문이 아님");
+            throw new NotMyOrderException();
         }
     }
 
-    public void payment(final BigDecimal requestAmount) {
-        this.getPayment().pay(requestAmount);
+    public void paymentAfterCheck(
+        final LocalDateTime paymentTime,
+        final BigDecimal requestAmount
+    ) {
+        if (!paymentDueDate.isAfter(paymentTime)) {
+            throw new NotAvailableException();
+        }
+        if (!payment.isNotAvailable()) {
+            throw new NotAvailableException();
+        }
+        if (payment.amountCheck(requestAmount) != 0) {
+            throw new CheckPaymentAmount();
+        }
     }
+
+    public void pay() {
+        payment.pay();
+    }
+
 }
