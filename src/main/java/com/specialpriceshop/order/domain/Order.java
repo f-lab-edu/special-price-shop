@@ -2,9 +2,10 @@ package com.specialpriceshop.order.domain;
 
 import com.specialpriceshop.account.domain.AccountId;
 import com.specialpriceshop.common.entity.BaseTimeEntity;
-import com.specialpriceshop.order.exception.CheckPaymentAmount;
+import com.specialpriceshop.order.exception.CheckPaymentAmountException;
 import com.specialpriceshop.order.exception.NotAvailableException;
 import com.specialpriceshop.order.exception.NotMyOrderException;
+import com.specialpriceshop.order.exception.PaymentDueDateOverException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
@@ -100,13 +101,13 @@ public class Order extends BaseTimeEntity {
         final BigDecimal requestAmount
     ) {
         if (!paymentDueDate.isAfter(paymentTime)) {
-            throw new NotAvailableException();
+            throw new PaymentDueDateOverException();
         }
-        if (!payment.isNotAvailable()) {
+        if (!payment.isAvailable()) {
             throw new NotAvailableException();
         }
         if (payment.amountCheck(requestAmount) != 0) {
-            throw new CheckPaymentAmount();
+            throw new CheckPaymentAmountException();
         }
     }
 

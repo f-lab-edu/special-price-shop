@@ -41,7 +41,8 @@ public enum ErrorCode {
     NOT_MY_ORDER(400, "ORDER001", "잘못된 주문 입니다."),
     NOT_AVAILABLE_ORDER(400, "ORDER002", "결제한 주문 건 이거나 이미 주문 취소된 결제 입니다."),
     CHECK_PAYMENT_AMOUNT(400, "ORDER003", "주문 금액을 확인하세요."),
-    ORDER_NOT_FOUND(404, "ORDER004", "존재하지 않는 주문 입니다"),;
+    ORDER_NOT_FOUND(404, "ORDER004", "존재하지 않는 주문 입니다"),
+    PAYMENT_DUE_DATE_OVER(400, "ORDER005", "결제 만료 시간을 초과 하였습니다."),;
 
     private final String code;
     private final String message;

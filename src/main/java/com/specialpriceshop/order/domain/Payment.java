@@ -49,7 +49,7 @@ public class Payment extends BaseTimeEntity {
         paymentStatus = PaymentStatus.PAYMENT;
     }
 
-    public boolean isNotAvailable() {
+    public boolean isAvailable() {
         return paymentStatus.equals(PaymentStatus.NONE);
     }
 

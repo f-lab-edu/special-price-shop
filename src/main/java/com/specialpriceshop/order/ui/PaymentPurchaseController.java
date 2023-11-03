@@ -25,7 +25,7 @@ public class PaymentPurchaseController {
         @AuthUser final AccountId accountId,
         @RequestBody final PaymentRequest paymentRequest
     ) {
-        paymentService.payment(orderId,accountId,  paymentRequest);
+        paymentService.payment(orderId, accountId, paymentRequest);
         return ResponseEntity.ok().build();
     }
 }
