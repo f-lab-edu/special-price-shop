@@ -12,6 +12,9 @@ import static org.springframework.data.redis.core.RedisKeyValueAdapter.EnableKey
  * @author cadence
  */
 @Configuration
-@EnableRedisRepositories(basePackages = "com.specialpriceshop.auth.domain", enableKeyspaceEvents = ON_STARTUP)
+@EnableRedisRepositories(
+    basePackages = "com.specialpriceshop.auth.domain",
+    enableKeyspaceEvents = ON_STARTUP,
+    keyspaceNotificationsConfigParameter = "")
 public class RedisConfig {
 }

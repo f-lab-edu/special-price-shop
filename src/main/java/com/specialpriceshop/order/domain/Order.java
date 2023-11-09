@@ -1,6 +1,12 @@
 package com.specialpriceshop.order.domain;
 
 import com.specialpriceshop.account.domain.AccountId;
+import com.specialpriceshop.common.entity.BaseTimeEntity;
+import com.specialpriceshop.order.exception.CheckPaymentAmountException;
+import com.specialpriceshop.order.exception.NotAvailableException;
+import com.specialpriceshop.order.exception.NotMyOrderException;
+import com.specialpriceshop.order.exception.PaymentDueDateOverException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "purchase_orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order {
+public class Order extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,4 +89,30 @@ public class Order {
             .payment(payment)
             .build();
     }
+
+    public void isMyOrder(final AccountId accountId) {
+        if (!this.accountId.equals(accountId)) {
+            throw new NotMyOrderException();
+        }
+    }
+
+    public void paymentAfterCheck(
+        final LocalDateTime paymentTime,
+        final BigDecimal requestAmount
+    ) {
+        if (!paymentDueDate.isAfter(paymentTime)) {
+            throw new PaymentDueDateOverException();
+        }
+        if (!payment.isAvailable()) {
+            throw new NotAvailableException();
+        }
+        if (payment.amountCheck(requestAmount) != 0) {
+            throw new CheckPaymentAmountException();
+        }
+    }
+
+    public void pay() {
+        payment.pay();
+    }
+
 }
